@@ -1,0 +1,129 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f9f4;
+  color: #333;
+  padding: 1rem;
+}
+
+header, footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #e0ffe0;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #2e7d32;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.alerts {
+  background-color: #fff3e0;
+  border: 1px solid #ffcc80;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.alerts button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.alerts button:hover {
+  background-color: #fb8c00;
+}
+
+footer p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Responsive layout */
+@media (min-width: 600px) {
+  .dashboard {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .card {
+    flex: 1;
+  }
+}
+.training {
+  background-color: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.training h2 {
+  text-align: center;
+  color: #1565c0;
+  margin-bottom: 0.5rem;
+}
+
+.training-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.training-card {
+  background-color: #ffffff;
+  border: 1px solid #bbdefb;
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.training-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  color: #0d47a1;
+}
+
+@media (min-width: 600px) {
+  .training-grid {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .training-card {
+    flex: 1;
+  }
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroHarvest.ai | Smart Farming Solutions – Wind & Weather Map</title>
+  <style>
+    /* ============ GLOBAL STYLES ============ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behaviour: smooth;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      color: #222;
+      background-color: #fff;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    h1, h2, h3 {
+      font-weight: 600;
+      color: #1a472a;
+    }
+    /* ============ SEARCH CONTAINER ============ */
+    #search-container {
+      padding: 20px 10%;
+      background: #f6fff7;
+      text-align: center;
+    }
+    #search-container input[type="text"] {
+      width: 60%;
+      max-width: 400px;
+      padding: 10px 14px;
+      font-size: 16px;
+      border: 2px solid #1a472a;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+    #search-container button {
+      padding: 10px 18px;
+      font-size: 16px;
+      background: #2ecc71;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    #search-container button:hover {
+      background: #27ae60;
+      transform: translateY(-2px);
+    }
+    /* ============ IFRAME / MAP ============ */
+    #mapFrame {
+      flex: 1;
+      width: 100%;
+      border: none;
+      /* to make full height minus the search bar */
+    }
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 768px) {
+      #search-container input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+      }
+      #search-container button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section id="search-container">
+    <input type="text" id="addressInput" placeholder="Enter location (e.g. Mumbai, India)" />
+    <button id="goButton">Show Weather Map</button>
+  </section>
+
+  <iframe id="mapFrame" src="" allowfullscreen></iframe>
+
+  <script>
+    const input = document.getElementById('addressInput');
+    const btn = document.getElementById('goButton');
+    const iframe = document.getElementById('mapFrame');
+
+    btn.addEventListener('click', () => {
+      const address = input.value.trim();
+      if (!address) {
+        alert('Please enter a location.');
+        return;
+      }
+      // Use geocoding to get lat/lon
+      const geocodeUrl = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address);
+      fetch(geocodeUrl)
+        .then(res => res.json())
+        .then(data => {
+          if (!data || data.length === 0) {
+            alert('Location not found.');
+            return;
+          }
+          const lat = data[0].lat;
+          const lon = data[0].lon;
+          const zoom = 6;  // adjust zoom if needed
+
+          // Build the embed URL for the map using layer "wind"
+          const layer = 'wind';
+          // Verified syntax for embed: see guide for this service. :contentReference[oaicite:0]{index=0}
+          const embedUrl = `https://embed.ventusky.com/?p=${lat};${lon};${zoom}&l=${layer}&w=soft`;
+
+          iframe.src = embedUrl;
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Error fetching location.');
+        });
+    });
+  </script>
+
+</body>
+</html>

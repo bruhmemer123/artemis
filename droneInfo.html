@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Location & Show Waze Live Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    #search-container {
+      padding: 10px;
+      background: #f0f0f0;
+    }
+    #addressInput {
+      width: 70%;
+      padding: 8px;
+      font-size: 16px;
+    }
+    #goButton {
+      padding: 8px 12px;
+      font-size: 16px;
+    }
+    #mapFrame {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="search-container">
+    <input type="text" id="addressInput" placeholder="Enter location (e.g. Mumbai, India)">
+    <button id="goButton">Go</button>
+  </div>
+
+  <iframe id="mapFrame"
+          src=""
+          allowfullscreen>
+  </iframe>
+
+  <script>
+    const input = document.getElementById('addressInput');
+    const btn = document.getElementById('goButton');
+    const iframe = document.getElementById('mapFrame');
+
+    btn.addEventListener('click', () => {
+      const address = input.value.trim();
+      if (!address) {
+        alert('Please enter a location.');
+        return;
+      }
+      // Use a simple geocoding service to get lat/lon
+      // (Here using a free endpoint for demo purposes)
+      const geocodeUrl = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address);
+      fetch(geocodeUrl)
+        .then(res => res.json())
+        .then(data => {
+          if (!data || data.length === 0) {
+            alert('Location not found.');
+            return;
+          }
+          const lat = data[0].lat;
+          const lon = data[0].lon;
+          const zoom = 12;  // you can adjust default zoom
+          // Build the Waze embed URL
+          const embedUrl = `https://embed.waze.com/iframe?zoom=${zoom}&lat=${lat}&lon=${lon}&pin=1&ct=livemap`;
+          iframe.src = embedUrl;
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Error fetching location.');
+        });
+    });
+  </script>
+
+</body>
+</html>

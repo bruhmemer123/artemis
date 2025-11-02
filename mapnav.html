@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroHarvest.ai | Smart Farming Solutions</title>
+  <style>
+    /* ============ GLOBAL STYLES ============ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      color: #222;
+      background-color: #fff;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    h1, h2, h3 {
+      font-weight: 600;
+      color: #1a472a;
+    }
+
+    /* ============ BACKGROUND SECTION ============ */
+    .hero {
+      /* full-screen background image */
+      background: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=80')
+                  no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+    }
+
+    /* ============ CIRCULAR BUTTONS ============ */
+    .circle-btn {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;  /* makes it a perfect circle */  
+      background: #2ecc71;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 20px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      text-align: center;
+    }
+    /* .circle-btn:hover {
+      background: #27ae60;
+      transform: translateY(-4px);
+    } */
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .circle-btn {
+        width: 140px;
+        height: 140px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Smarter Farming. Greener Planet.</h1>
+      <p>AI-powered insights and aerial intelligence for sustainable growth.</p>
+
+      <div class="buttons">
+        <a href="/windy.html" class="circle-btn">WIND MAP</a>
+        <a href="/soil.html" class="circle-btn">SOIL MAP</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Example content for Box1 & Box2 sections -->
+  <section id="box1" style="padding: 80px 10%; text-align:center;">
+    <h2>Box 1 Section</h2>
+    <p>Details for Box 1 go here.</p>
+  </section>
+
+  <section id="box2" style="padding: 80px 10%; text-align:center; background:#f6fff7;">
+    <h2>Box 2 Section</h2>
+    <p>Details for Box 2 go here.</p>
+  </section>
+
+</body>
+</html>

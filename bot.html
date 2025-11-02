@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KisanSahay | Smart Farm Chat Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========= GLOBAL THEME ========= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #f6fff7;
+      color: #1a472a;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ========= NAVBAR ========= */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a472a;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    nav li a {
+      color: #1a472a;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav li a:hover {
+      color: #27ae60;
+    }
+
+    /* ========= CHAT SECTION ========= */
+    .chat-container {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 30px;
+      max-width: 1100px;
+      margin: 120px auto 60px;
+      padding: 0 20px;
+    }
+
+    .chat-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 640px;
+      border: 1px solid #e6f2e6;
+    }
+
+    .chat-header {
+      background: linear-gradient(90deg, #27ae60, #1a472a);
+      color: #fff;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .chat-header p {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 20px;
+      background: #f9fdf9;
+      overflow-y: auto;
+    }
+
+    .msg {
+      max-width: 75%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      line-height: 1.5;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .bot {
+      background: #e9f7ef;
+      color: #1a472a;
+      align-self: flex-start;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 6px;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #fff;
+      background: #27ae60;
+    }
+
+    .chat-footer {
+      padding: 14px;
+      border-top: 1px solid #e6f2e6;
+      background: #f9f9f9;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #d6eedd;
+      background: #fff;
+      color: #666;
+    }
+
+    .input:disabled {
+      opacity: 0.8;
+    }
+
+    .send {
+      background: #27ae60;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 600;
+      cursor: not-allowed;
+    }
+
+    /* ========= SIDEBAR ========= */
+    .info {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      padding: 20px;
+      border: 1px solid #e6f2e6;
+    }
+
+    .info h4 {
+      margin-top: 0;
+      color: #1a472a;
+    }
+
+    .field {
+      margin-top: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .cta {
+      display: block;
+      margin-top: 20px;
+      background: #1a472a;
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #777;
+      margin-top: 20px;
+    }
+
+    /* ========= RESPONSIVE ========= */
+    @media (max-width: 900px) {
+      .chat-container {
+        grid-template-columns: 1fr;
+        margin-top: 100px;
+      }
+    }
+
+    footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">KisanSahay</div>
+    <ul>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="#chat">Chat</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- CHAT INTERFACE -->
+  <div class="chat-container" id="chat">
+    <main class="chat-card">
+      <header class="chat-header">
+        <h3>KisanSahay Chatbot</h3>
+        <p>Smart Farm Consultancy</p>
+      </header>
+
+      <section class="chat-body" id="chatBody">
+        <div class="meta">
+          <div class="avatar">KS</div>
+          <div>KisanSahay · Today</div>
+        </div>
+        <div class="msg bot">Hello, how can I help you?</div>
+      </section>
+
+      <footer class="chat-footer">
+        <div class="input-row">
+          <input class="input" placeholder="Type your message (mock only — not functional)" disabled />
+          <button class="send" disabled>Send</button>
+        </div>
+      </footer>
+    </main>
+
+    <aside class="info">
+      <h4>Quick Farm Profile</h4>
+      <div class="field">
+        <label>Farmer Name</label>
+        <input placeholder="e.g., Ramesh" />
+      </div>
+      <div class="field">
+        <label>Location</label>
+        <input placeholder="e.g., Nashik, Maharashtra" />
+      </div>
+      <div class="field">
+        <label>Crop</label>
+        <select>
+          <option>Maize</option>
+          <option>Wheat</option>
+          <option>Rice</option>
+          <option>Vegetables</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <a class="cta" href="#" onclick="event.preventDefault();alert('This is a mockup — no action performed.')">Request Callback</a>
+      <div class="footer-note">Demo version — integrate backend to make it functional</div>
+    </aside>
+  </div>
+
+  <!-- FOOTER -->
+  
+</body>
+</html>
